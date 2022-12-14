@@ -20,5 +20,29 @@ ORDER BY release_date;
 
 SELECT * FROM movie_title_1995;
 
+SELECT 
+	  CASE WHEN runtime >= 0 AND runtime <= 60 THEN '0-60'
+	  	   WHEN runtime > 60 AND runtime <= 90 THEN '61-90'
+		   WHEN runtime > 90 AND runtime <= 120 THEN '91-120'
+		   WHEN runtime > 120 AND runtime <= 150 THEN '121-150'
+		   WHEN runtime >150 AND runtime <= 180 THEN '151-180'
+		   ELSE 'Over 180'
+	  END runtime_range,
+	  count(*) as movie_runtime
+INTO movies_by_runtime
+FROM movies
+GROUP BY
+	  CASE WHEN runtime >= 0 AND runtime <= 60 THEN '0-60'
+	  	   WHEN runtime > 60 AND runtime <= 90 THEN '61-90'
+		   WHEN runtime > 90 AND runtime <= 120 THEN '91-120'
+		   WHEN runtime > 120 AND runtime <= 150 THEN '121-150'
+		   WHEN runtime >150 AND runtime <= 180 THEN '151-180'
+		   ELSE 'Over 180'
+	  END
+ORDER BY movie_runtime;
+
+SELECT * FROM movies_by_runtime;
+
+
 
 
